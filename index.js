@@ -34,6 +34,22 @@ function handleEvent(event) {
     });
   }
 
+  // スタンプメッセージが送信された場合の処理
+  if (event.message.type === 'sticker') {
+    return client.replyMessage(event.replyToken, {
+      type: 'text',
+      text: 'スタンプありがとう！めっちゃいい感じだね！',
+    });
+  }
+
+  // 絵文字メッセージが送信された場合の処理
+  if (event.message.type === 'emoji') {
+    return client.replyMessage(event.replyToken, {
+      type: 'text',
+      text: '絵文字！いいセンスだね！',
+    });
+  }
+
   // テキストメッセージが送信された場合の処理
   if (event.message.type === 'text') {
     return client.replyMessage(event.replyToken, {
@@ -44,6 +60,7 @@ function handleEvent(event) {
 
   return Promise.resolve(null); // 上記以外のメッセージタイプは無視
 }
+
 
 // サーバーをポート3000で起動
 const port = process.env.PORT || 3000;
